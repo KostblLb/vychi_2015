@@ -1,5 +1,7 @@
 ﻿#include <iostream>
 #include <string>
+#include <cmath>
+
 double delta;
 int m; 
 const double a = 0.8, b = 1.2;
@@ -7,7 +9,7 @@ double** U;
 double** U_new;
 double** U_new1;
 double** U_norm;
-double lambda_max = FLT_MIN, lambda_min = 1, lambda_max_old = 0, lambda_min_old = 0;
+double lambda_max = -1.0, lambda_min = 1.0, lambda_max_old = 0.0, lambda_min_old = 0.0;
 double** A(double** u, double a, double b){
 	double** u_new = new double*[m];
 	for (int i = 0; i < m; i++)
@@ -188,7 +190,11 @@ int main(){
 		U[i] = new double[m];
 		//U_norm[i] = new double[m]; //
 	}
+<<<<<<< HEAD
 	for (int i = 0; i < m; i++){ //заполняем весь массив единицами
+=======
+	for (int i = 0; i < m; i++){ //çàïîëíÿåì âåñü ìàññèâ åäèíèöàìè
+>>>>>>> origin/master
 		for (int j = 0; j < m; j++){
 			U[i][j] = 1;
 		}
@@ -199,7 +205,11 @@ int main(){
 		U[i][m - 1] = 0;
 		U[m - 1][i] = 0;
 	}
+<<<<<<< HEAD
 	for (int i = m / 2; i < m; i++){//заполняем выбранные части массива нулями
+=======
+	for (int i = m / 2; i < m; i++){//çàïîëíÿåì âûáðàííûå ÷àñòè ìàññèâà íóëÿìè
+>>>>>>> origin/master
 		for (int j = 0; j < m; j++){
 			if (j <= m / 2 || i >= (1.5*m) - j)
 				U[i][j] = 0;
@@ -227,11 +237,19 @@ int main(){
 				U[i][j] /= norma;
 		n++;
 		if (abs((lambda_max - lambda_max_old) / lambda_max) < delta2) {
+<<<<<<< HEAD
 			cause = "Converged";  //случай сходимости
 			break;
 		}
 		if (lambda_max == 0.0) {
 			cause = "NaN"; lambda_max = lambda_max_old;  //случай переполнения double
+=======
+			cause = "Converged";  //ñëó÷àé ñõîäèìîñòè
+			break;
+		}
+		if (lambda_max == 0.0) {
+			cause = "NaN"; lambda_max = lambda_max_old;  //ñëó÷àé ïåðåïîëíåíèÿ double
+>>>>>>> origin/master
 			break;
 		}
 	}
@@ -246,13 +264,21 @@ int main(){
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+<<<<<<< HEAD
 	U = new double*[m]; ///всё сбрасываем для поиска lambda_min
+=======
+	U = new double*[m]; ///âñ¸ ñáðàñûâàåì äëÿ ïîèñêà lambda_min
+>>>>>>> origin/master
 	//U_norm = new double*[m]; //
 	for (int i = 0; i < m; i++){
 		U[i] = new double[m];
 		//U_norm[i] = new double[m]; //
 	}
+<<<<<<< HEAD
 	for (int i = 0; i < m; i++){ //заполняем весь массив единицами
+=======
+	for (int i = 0; i < m; i++){ //çàïîëíÿåì âåñü ìàññèâ åäèíèöàìè
+>>>>>>> origin/master
 		for (int j = 0; j < m; j++){
 			U[i][j] = 1;
 		}
@@ -263,7 +289,11 @@ int main(){
 		U[i][m - 1] = 0;
 		U[m - 1][i] = 0;
 	}
+<<<<<<< HEAD
 	for (int i = m / 2; i < m; i++){//заполняем выбранные части массива нулями
+=======
+	for (int i = m / 2; i < m; i++){//çàïîëíÿåì âûáðàííûå ÷àñòè ìàññèâà íóëÿìè
+>>>>>>> origin/master
 		for (int j = 0; j < m; j++){
 			if (j <= m / 2 || i >= (1.5*m) - j)
 				U[i][j] = 0;
@@ -309,22 +339,36 @@ int main(){
 	system("pause");
 
 
+<<<<<<< HEAD
 	//поиск оператора по методу минимальных невязок
 
 	U = new double*[m]; ///всё сбрасываем для поиска lambda_min
+=======
+	//ïîèñê îïåðàòîðà ïî ìåòîäó ìèíèìàëüíûõ íåâÿçîê
+
+	U = new double*[m]; ///âñ¸ ñáðàñûâàåì äëÿ ïîèñêà lambda_min
+>>>>>>> origin/master
 	//U_norm = new double*[m]; //
 	for (int i = 0; i < m; i++){
 		U[i] = new double[m];
 		//U_norm[i] = new double[m]; //
 	}
+<<<<<<< HEAD
 	for (int i = 0; i < m; i++){ //заполняем весь массив нулями(для нач. приближения)
+=======
+	for (int i = 0; i < m; i++){ //çàïîëíÿåì âåñü ìàññèâ íóëÿìè(äëÿ íà÷. ïðèáëèæåíèÿ)
+>>>>>>> origin/master
 		for (int j = 0; j < m; j++){
 			U[i][j] = 0;
 		}
 	}
 	for (int i = 0; i < m / 2; i++)
 		U[i][m - 1] = phi(m - 1, i);
+<<<<<<< HEAD
 	for (int i = m / 2; i < m; i++){//заполняем границу по граничным условиям
+=======
+	for (int i = m / 2; i < m; i++){//çàïîëíÿåì ãðàíèöó ïî ãðàíè÷íûì óñëîâèÿì
+>>>>>>> origin/master
 		for (int j = 0; j < m; j++){
 
 			if (j < m / 2 || i >(1.5*m) - j)
@@ -343,7 +387,11 @@ int main(){
 	n = 0;
 	double ** Uex = new double*[m];
 	for (int i = 0; i < m; i++) Uex[i] = new double[m];
+<<<<<<< HEAD
 	for (int i = 0; i < m; i++){ //заполняем весь массив нулями(для нач. приближения)
+=======
+	for (int i = 0; i < m; i++){ //çàïîëíÿåì âåñü ìàññèâ íóëÿìè(äëÿ íà÷. ïðèáëèæåíèÿ)
+>>>>>>> origin/master
 		for (int j = 0; j < m; j++){
 			Uex[i][j] = 0;
 		}
@@ -351,7 +399,11 @@ int main(){
 	for (int i = 0; i < m / 2; i++)
 		for (int j = 0; j < m; j++)
 			Uex[i][j] = phi(j, i);
+<<<<<<< HEAD
 	for (int i = m / 2; i < m; i++){//заполняем границу по граничным условиям
+=======
+	for (int i = m / 2; i < m; i++){//çàïîëíÿåì ãðàíèöó ïî ãðàíè÷íûì óñëîâèÿì
+>>>>>>> origin/master
 		for (int j = 0; j < m; j++){
 
 			if (j < m / 2 || i >(1.5*m) - j)
@@ -370,7 +422,11 @@ int main(){
 		for (int i = 0; i < m / 2; i++)
 			//r[i][m - 1] = Ayk[i][m-1]-f(m-1,i);
 			Ayk[i][m - 1] = 0;
+<<<<<<< HEAD
 		for (int i = m / 2; i < m; i++){//заполняем границу по граничным условиям
+=======
+		for (int i = m / 2; i < m; i++){//çàïîëíÿåì ãðàíèöó ïî ãðàíè÷íûì óñëîâèÿì
+>>>>>>> origin/master
 			for (int j = 0; j < m; j++){
 				if (j < m / 2 || i >(1.5*m) - j)
 					Ayk[i][j] = 0;
@@ -385,7 +441,11 @@ int main(){
 		for (int i = 0; i < m / 2; i++)
 			//r[i][m - 1] = Ayk[i][m-1]-f(m-1,i);
 			r[i][m - 1] = 0;
+<<<<<<< HEAD
 		for (int i = m / 2; i < m; i++){//заполняем границу по граничным условиям
+=======
+		for (int i = m / 2; i < m; i++){//çàïîëíÿåì ãðàíèöó ïî ãðàíè÷íûì óñëîâèÿì
+>>>>>>> origin/master
 			for (int j = 0; j < m; j++){
 				if (j < m / 2 || i >(1.5*m) - j)
 					r[i][j] = 0;
@@ -424,8 +484,11 @@ int main(){
 			normz = norma(z);
 			nr = norma(r);
 			fprintf(stdout, "w:%d  delta:%f  n:%d  |U|:%f  |z|:%f  |r|:%f\n", m, delta, n, normU, normz, nr);
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/master
 			for (int re = m-1; re >=0; --re) {
 				for (int rere = 0; rere < m; ++rere)
 					fprintf(stdout, "%f ", U[re][rere]);
@@ -438,7 +501,10 @@ int main(){
 					fprintf(stdout, "%f ", Uex[re][rere]);
 				fprintf(stdout, "\n");
 			}
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 			break;
 		}
 	}
