@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cmath>
 double delta;
 int m; 
 const double a = 0.8, b = 1.2;
@@ -7,7 +8,7 @@ double** U;
 double** U_new;
 double** U_new1;
 double** U_norm;
-double lambda_max = FLT_MIN, lambda_min = 1, lambda_max_old = 0, lambda_min_old = 0;
+double lambda_max = -1.0, lambda_min = 1.0, lambda_max_old = 0.0, lambda_min_old = 0.0;
 double** A(double** u, double a, double b){
 	double** u_new = new double*[m];
 	for (int i = 0; i < m; i++)
@@ -188,7 +189,7 @@ int main(){
 		U[i] = new double[m];
 		//U_norm[i] = new double[m]; //
 	}
-	for (int i = 0; i < m; i++){ //заполняем весь массив единицами
+	for (int i = 0; i < m; i++){ //Г§Г ГЇГ®Г«Г­ГїГҐГ¬ ГўГҐГ±Гј Г¬Г Г±Г±ГЁГў ГҐГ¤ГЁГ­ГЁГ¶Г Г¬ГЁ
 		for (int j = 0; j < m; j++){
 			U[i][j] = 1;
 		}
@@ -199,7 +200,7 @@ int main(){
 		U[i][m - 1] = 0;
 		U[m - 1][i] = 0;
 	}
-	for (int i = m / 2; i < m; i++){//заполняем выбранные части массива нулями
+	for (int i = m / 2; i < m; i++){//Г§Г ГЇГ®Г«Г­ГїГҐГ¬ ГўГ»ГЎГ°Г Г­Г­Г»ГҐ Г·Г Г±ГІГЁ Г¬Г Г±Г±ГЁГўГ  Г­ГіГ«ГїГ¬ГЁ
 		for (int j = 0; j < m; j++){
 			if (j <= m / 2 || i >= (1.5*m) - j)
 				U[i][j] = 0;
@@ -227,11 +228,11 @@ int main(){
 				U[i][j] /= norma;
 		n++;
 		if (abs((lambda_max - lambda_max_old) / lambda_max) < delta2) {
-			cause = "Converged";  //случай сходимости
+			cause = "Converged";  //Г±Г«ГіГ·Г Г© Г±ГµГ®Г¤ГЁГ¬Г®Г±ГІГЁ
 			break;
 		}
 		if (lambda_max == 0.0) {
-			cause = "NaN"; lambda_max = lambda_max_old;  //случай переполнения double
+			cause = "NaN"; lambda_max = lambda_max_old;  //Г±Г«ГіГ·Г Г© ГЇГҐГ°ГҐГЇГ®Г«Г­ГҐГ­ГЁГї double
 			break;
 		}
 	}
@@ -246,13 +247,13 @@ int main(){
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	U = new double*[m]; ///всё сбрасываем для поиска lambda_min
+	U = new double*[m]; ///ГўГ±Вё Г±ГЎГ°Г Г±Г»ГўГ ГҐГ¬ Г¤Г«Гї ГЇГ®ГЁГ±ГЄГ  lambda_min
 	//U_norm = new double*[m]; //
 	for (int i = 0; i < m; i++){
 		U[i] = new double[m];
 		//U_norm[i] = new double[m]; //
 	}
-	for (int i = 0; i < m; i++){ //заполняем весь массив единицами
+	for (int i = 0; i < m; i++){ //Г§Г ГЇГ®Г«Г­ГїГҐГ¬ ГўГҐГ±Гј Г¬Г Г±Г±ГЁГў ГҐГ¤ГЁГ­ГЁГ¶Г Г¬ГЁ
 		for (int j = 0; j < m; j++){
 			U[i][j] = 1;
 		}
@@ -263,7 +264,7 @@ int main(){
 		U[i][m - 1] = 0;
 		U[m - 1][i] = 0;
 	}
-	for (int i = m / 2; i < m; i++){//заполняем выбранные части массива нулями
+	for (int i = m / 2; i < m; i++){//Г§Г ГЇГ®Г«Г­ГїГҐГ¬ ГўГ»ГЎГ°Г Г­Г­Г»ГҐ Г·Г Г±ГІГЁ Г¬Г Г±Г±ГЁГўГ  Г­ГіГ«ГїГ¬ГЁ
 		for (int j = 0; j < m; j++){
 			if (j <= m / 2 || i >= (1.5*m) - j)
 				U[i][j] = 0;
@@ -309,22 +310,22 @@ int main(){
 	system("pause");
 
 
-	//поиск оператора по методу минимальных невязок
+	//ГЇГ®ГЁГ±ГЄ Г®ГЇГҐГ°Г ГІГ®Г°Г  ГЇГ® Г¬ГҐГІГ®Г¤Гі Г¬ГЁГ­ГЁГ¬Г Г«ГјГ­Г»Гµ Г­ГҐГўГїГ§Г®ГЄ
 
-	U = new double*[m]; ///всё сбрасываем для поиска lambda_min
+	U = new double*[m]; ///ГўГ±Вё Г±ГЎГ°Г Г±Г»ГўГ ГҐГ¬ Г¤Г«Гї ГЇГ®ГЁГ±ГЄГ  lambda_min
 	//U_norm = new double*[m]; //
 	for (int i = 0; i < m; i++){
 		U[i] = new double[m];
 		//U_norm[i] = new double[m]; //
 	}
-	for (int i = 0; i < m; i++){ //заполняем весь массив нулями(для нач. приближения)
+	for (int i = 0; i < m; i++){ //Г§Г ГЇГ®Г«Г­ГїГҐГ¬ ГўГҐГ±Гј Г¬Г Г±Г±ГЁГў Г­ГіГ«ГїГ¬ГЁ(Г¤Г«Гї Г­Г Г·. ГЇГ°ГЁГЎГ«ГЁГ¦ГҐГ­ГЁГї)
 		for (int j = 0; j < m; j++){
 			U[i][j] = 0;
 		}
 	}
 	for (int i = 0; i < m / 2; i++)
 		U[i][m - 1] = phi(m - 1, i);
-	for (int i = m / 2; i < m; i++){//заполняем границу по граничным условиям
+	for (int i = m / 2; i < m; i++){//Г§Г ГЇГ®Г«Г­ГїГҐГ¬ ГЈГ°Г Г­ГЁГ¶Гі ГЇГ® ГЈГ°Г Г­ГЁГ·Г­Г»Г¬ ГіГ±Г«Г®ГўГЁГїГ¬
 		for (int j = 0; j < m; j++){
 
 			if (j < m / 2 || i >(1.5*m) - j)
@@ -343,7 +344,7 @@ int main(){
 	n = 0;
 	double ** Uex = new double*[m];
 	for (int i = 0; i < m; i++) Uex[i] = new double[m];
-	for (int i = 0; i < m; i++){ //заполняем весь массив нулями(для нач. приближения)
+	for (int i = 0; i < m; i++){ //Г§Г ГЇГ®Г«Г­ГїГҐГ¬ ГўГҐГ±Гј Г¬Г Г±Г±ГЁГў Г­ГіГ«ГїГ¬ГЁ(Г¤Г«Гї Г­Г Г·. ГЇГ°ГЁГЎГ«ГЁГ¦ГҐГ­ГЁГї)
 		for (int j = 0; j < m; j++){
 			Uex[i][j] = 0;
 		}
@@ -351,7 +352,7 @@ int main(){
 	for (int i = 0; i < m / 2; i++)
 		for (int j = 0; j < m; j++)
 			Uex[i][j] = phi(j, i);
-	for (int i = m / 2; i < m; i++){//заполняем границу по граничным условиям
+	for (int i = m / 2; i < m; i++){//Г§Г ГЇГ®Г«Г­ГїГҐГ¬ ГЈГ°Г Г­ГЁГ¶Гі ГЇГ® ГЈГ°Г Г­ГЁГ·Г­Г»Г¬ ГіГ±Г«Г®ГўГЁГїГ¬
 		for (int j = 0; j < m; j++){
 
 			if (j < m / 2 || i >(1.5*m) - j)
@@ -370,7 +371,7 @@ int main(){
 		for (int i = 0; i < m / 2; i++)
 			//r[i][m - 1] = Ayk[i][m-1]-f(m-1,i);
 			Ayk[i][m - 1] = 0;
-		for (int i = m / 2; i < m; i++){//заполняем границу по граничным условиям
+		for (int i = m / 2; i < m; i++){//Г§Г ГЇГ®Г«Г­ГїГҐГ¬ ГЈГ°Г Г­ГЁГ¶Гі ГЇГ® ГЈГ°Г Г­ГЁГ·Г­Г»Г¬ ГіГ±Г«Г®ГўГЁГїГ¬
 			for (int j = 0; j < m; j++){
 				if (j < m / 2 || i >(1.5*m) - j)
 					Ayk[i][j] = 0;
@@ -385,7 +386,7 @@ int main(){
 		for (int i = 0; i < m / 2; i++)
 			//r[i][m - 1] = Ayk[i][m-1]-f(m-1,i);
 			r[i][m - 1] = 0;
-		for (int i = m / 2; i < m; i++){//заполняем границу по граничным условиям
+		for (int i = m / 2; i < m; i++){//Г§Г ГЇГ®Г«Г­ГїГҐГ¬ ГЈГ°Г Г­ГЁГ¶Гі ГЇГ® ГЈГ°Г Г­ГЁГ·Г­Г»Г¬ ГіГ±Г«Г®ГўГЁГїГ¬
 			for (int j = 0; j < m; j++){
 				if (j < m / 2 || i >(1.5*m) - j)
 					r[i][j] = 0;
