@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+
 double delta;
 int m; 
 const double a = 0.8, b = 1.2;
@@ -425,6 +426,18 @@ int main(){
 			normz = norma(z);
 			nr = norma(r);
 			fprintf(stdout, "w:%d  delta:%f  n:%d  |U|:%f  |z|:%f  |r|:%f\n", m, delta, n, normU, normz, nr);
+			for (int re = m-1; re >=0; --re) {
+				for (int rere = 0; rere < m; ++rere)
+					fprintf(stdout, "%f ", U[re][rere]);
+				fprintf(stdout, "\n");
+			}
+			fprintf(stdout, "--------------------------\n");
+
+			for (int re = m-1; re >=0; --re) {
+				for (int rere = 0; rere < m; ++rere)
+					fprintf(stdout, "%f ", Uex[re][rere]);
+				fprintf(stdout, "\n");
+			}
 			break;
 		}
 	}
