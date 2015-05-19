@@ -1,4 +1,4 @@
-#include <iostream>
+п»ї#include <iostream>
 #include <string>
 double delta;
 int m; 
@@ -188,7 +188,7 @@ int main(){
 		U[i] = new double[m];
 		//U_norm[i] = new double[m]; //
 	}
-	for (int i = 0; i < m; i++){ //заполняем весь массив единицами
+	for (int i = 0; i < m; i++){ //Р·Р°РїРѕР»РЅСЏРµРј РІРµСЃСЊ РјР°СЃСЃРёРІ РµРґРёРЅРёС†Р°РјРё
 		for (int j = 0; j < m; j++){
 			U[i][j] = 1;
 		}
@@ -199,7 +199,7 @@ int main(){
 		U[i][m - 1] = 0;
 		U[m - 1][i] = 0;
 	}
-	for (int i = m / 2; i < m; i++){//заполняем выбранные части массива нулями
+	for (int i = m / 2; i < m; i++){//Р·Р°РїРѕР»РЅСЏРµРј РІС‹Р±СЂР°РЅРЅС‹Рµ С‡Р°СЃС‚Рё РјР°СЃСЃРёРІР° РЅСѓР»СЏРјРё
 		for (int j = 0; j < m; j++){
 			if (j <= m / 2 || i >= (1.5*m) - j)
 				U[i][j] = 0;
@@ -227,11 +227,11 @@ int main(){
 				U[i][j] /= norma;
 		n++;
 		if (abs((lambda_max - lambda_max_old) / lambda_max) < delta2) {
-			cause = "Converged";  //случай сходимости
+			cause = "Converged";  //СЃР»СѓС‡Р°Р№ СЃС…РѕРґРёРјРѕСЃС‚Рё
 			break;
 		}
 		if (lambda_max == 0.0) {
-			cause = "NaN"; lambda_max = lambda_max_old;  //случай переполнения double
+			cause = "NaN"; lambda_max = lambda_max_old;  //СЃР»СѓС‡Р°Р№ РїРµСЂРµРїРѕР»РЅРµРЅРёСЏ double
 			break;
 		}
 	}
@@ -246,13 +246,13 @@ int main(){
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////
-	U = new double*[m]; ///всё сбрасываем для поиска lambda_min
+	U = new double*[m]; ///РІСЃС‘ СЃР±СЂР°СЃС‹РІР°РµРј РґР»СЏ РїРѕРёСЃРєР° lambda_min
 	//U_norm = new double*[m]; //
 	for (int i = 0; i < m; i++){
 		U[i] = new double[m];
 		//U_norm[i] = new double[m]; //
 	}
-	for (int i = 0; i < m; i++){ //заполняем весь массив единицами
+	for (int i = 0; i < m; i++){ //Р·Р°РїРѕР»РЅСЏРµРј РІРµСЃСЊ РјР°СЃСЃРёРІ РµРґРёРЅРёС†Р°РјРё
 		for (int j = 0; j < m; j++){
 			U[i][j] = 1;
 		}
@@ -263,7 +263,7 @@ int main(){
 		U[i][m - 1] = 0;
 		U[m - 1][i] = 0;
 	}
-	for (int i = m / 2; i < m; i++){//заполняем выбранные части массива нулями
+	for (int i = m / 2; i < m; i++){//Р·Р°РїРѕР»РЅСЏРµРј РІС‹Р±СЂР°РЅРЅС‹Рµ С‡Р°СЃС‚Рё РјР°СЃСЃРёРІР° РЅСѓР»СЏРјРё
 		for (int j = 0; j < m; j++){
 			if (j <= m / 2 || i >= (1.5*m) - j)
 				U[i][j] = 0;
@@ -309,22 +309,22 @@ int main(){
 	system("pause");
 
 
-	//поиск оператора по методу минимальных невязок
+	//РїРѕРёСЃРє РѕРїРµСЂР°С‚РѕСЂР° РїРѕ РјРµС‚РѕРґСѓ РјРёРЅРёРјР°Р»СЊРЅС‹С… РЅРµРІСЏР·РѕРє
 
-	U = new double*[m]; ///всё сбрасываем для поиска lambda_min
+	U = new double*[m]; ///РІСЃС‘ СЃР±СЂР°СЃС‹РІР°РµРј РґР»СЏ РїРѕРёСЃРєР° lambda_min
 	//U_norm = new double*[m]; //
 	for (int i = 0; i < m; i++){
 		U[i] = new double[m];
 		//U_norm[i] = new double[m]; //
 	}
-	for (int i = 0; i < m; i++){ //заполняем весь массив нулями(для нач. приближения)
+	for (int i = 0; i < m; i++){ //Р·Р°РїРѕР»РЅСЏРµРј РІРµСЃСЊ РјР°СЃСЃРёРІ РЅСѓР»СЏРјРё(РґР»СЏ РЅР°С‡. РїСЂРёР±Р»РёР¶РµРЅРёСЏ)
 		for (int j = 0; j < m; j++){
 			U[i][j] = 0;
 		}
 	}
 	for (int i = 0; i < m / 2; i++)
 		U[i][m - 1] = phi(m - 1, i);
-	for (int i = m / 2; i < m; i++){//заполняем границу по граничным условиям
+	for (int i = m / 2; i < m; i++){//Р·Р°РїРѕР»РЅСЏРµРј РіСЂР°РЅРёС†Сѓ РїРѕ РіСЂР°РЅРёС‡РЅС‹Рј СѓСЃР»РѕРІРёСЏРј
 		for (int j = 0; j < m; j++){
 
 			if (j < m / 2 || i >(1.5*m) - j)
@@ -343,7 +343,7 @@ int main(){
 	n = 0;
 	double ** Uex = new double*[m];
 	for (int i = 0; i < m; i++) Uex[i] = new double[m];
-	for (int i = 0; i < m; i++){ //заполняем весь массив нулями(для нач. приближения)
+	for (int i = 0; i < m; i++){ //Р·Р°РїРѕР»РЅСЏРµРј РІРµСЃСЊ РјР°СЃСЃРёРІ РЅСѓР»СЏРјРё(РґР»СЏ РЅР°С‡. РїСЂРёР±Р»РёР¶РµРЅРёСЏ)
 		for (int j = 0; j < m; j++){
 			Uex[i][j] = 0;
 		}
@@ -351,7 +351,7 @@ int main(){
 	for (int i = 0; i < m / 2; i++)
 		for (int j = 0; j < m; j++)
 			Uex[i][j] = phi(j, i);
-	for (int i = m / 2; i < m; i++){//заполняем границу по граничным условиям
+	for (int i = m / 2; i < m; i++){//Р·Р°РїРѕР»РЅСЏРµРј РіСЂР°РЅРёС†Сѓ РїРѕ РіСЂР°РЅРёС‡РЅС‹Рј СѓСЃР»РѕРІРёСЏРј
 		for (int j = 0; j < m; j++){
 
 			if (j < m / 2 || i >(1.5*m) - j)
@@ -370,7 +370,7 @@ int main(){
 		for (int i = 0; i < m / 2; i++)
 			//r[i][m - 1] = Ayk[i][m-1]-f(m-1,i);
 			Ayk[i][m - 1] = 0;
-		for (int i = m / 2; i < m; i++){//заполняем границу по граничным условиям
+		for (int i = m / 2; i < m; i++){//Р·Р°РїРѕР»РЅСЏРµРј РіСЂР°РЅРёС†Сѓ РїРѕ РіСЂР°РЅРёС‡РЅС‹Рј СѓСЃР»РѕРІРёСЏРј
 			for (int j = 0; j < m; j++){
 				if (j < m / 2 || i >(1.5*m) - j)
 					Ayk[i][j] = 0;
@@ -385,7 +385,7 @@ int main(){
 		for (int i = 0; i < m / 2; i++)
 			//r[i][m - 1] = Ayk[i][m-1]-f(m-1,i);
 			r[i][m - 1] = 0;
-		for (int i = m / 2; i < m; i++){//заполняем границу по граничным условиям
+		for (int i = m / 2; i < m; i++){//Р·Р°РїРѕР»РЅСЏРµРј РіСЂР°РЅРёС†Сѓ РїРѕ РіСЂР°РЅРёС‡РЅС‹Рј СѓСЃР»РѕРІРёСЏРј
 			for (int j = 0; j < m; j++){
 				if (j < m / 2 || i >(1.5*m) - j)
 					r[i][j] = 0;
@@ -424,6 +424,21 @@ int main(){
 			normz = norma(z);
 			nr = norma(r);
 			fprintf(stdout, "w:%d  delta:%f  n:%d  |U|:%f  |z|:%f  |r|:%f\n", m, delta, n, normU, normz, nr);
+
+
+			for (int re = m-1; re >=0; --re) {
+				for (int rere = 0; rere < m; ++rere)
+					fprintf(stdout, "%f ", U[re][rere]);
+				fprintf(stdout, "\n");
+			}
+			fprintf(stdout, "--------------------------\n");
+
+			for (int re = m-1; re >=0; --re) {
+				for (int rere = 0; rere < m; ++rere)
+					fprintf(stdout, "%f ", Uex[re][rere]);
+				fprintf(stdout, "\n");
+			}
+
 			break;
 		}
 	}
